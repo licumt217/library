@@ -1,58 +1,83 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+
+
+    <Modal v-model="isShowLoginModal" width="460" :closable="false" :mask-closable="false">
+        <p slot="header" style="color:#f60;text-align:center">
+            <!--<Icon type="ios-information-circle"></Icon>-->
+            <span>登录</span>
+        </p>
+        <div style="text-align:center">
+            <Form :model="formItem" :label-width="80">
+
+                <FormItem label="用户名">
+                    <Input v-model="formItem.username" placeholder="请输入用户名"></Input>
+                </FormItem>
+
+                <FormItem label="密码">
+                    <Input v-model="formItem.password" placeholder="请输入密码"></Input>
+                </FormItem>
+
+                <FormItem label="用户类型">
+                    <RadioGroup v-model="formItem.userType">
+                        <Radio label="student">学生</Radio>
+                        <Radio label="teacher">教师</Radio>
+                        <Radio label="admin">管理员</Radio>
+                    </RadioGroup>
+                </FormItem>
+
+                <FormItem v-show="formItem.userType==='student'" label="学号">
+                    <Input v-model="formItem.studentNumber" placeholder="请输入学号"></Input>
+                </FormItem>
+
+                <FormItem v-show="formItem.userType==='teacher'"  label="工号">
+                    <Input v-model="formItem.jobNumber" placeholder="请输入工号"></Input>
+                </FormItem>
+
+
+            </Form>
+        </div>
+        <div slot="footer" style="text-align: center">
+            <Button type="primary">登录</Button>
+        </div>
+    </Modal>
+
+
+
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+    export default {
+        data() {
+            return {
+                formItem: {
+                    username: '',
+                    password: '',
+                    userType: 'student',
+                    studentNumber: '',
+                    jobNumber: '',
+                },
+                isShowLoginModal:true
+            }
+        }
+    }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+    h3 {
+        margin: 40px 0 0;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    a {
+        color: #42b983;
+    }
 </style>
