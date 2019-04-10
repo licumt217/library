@@ -1,9 +1,6 @@
 <template>
     <div id="app">
-        <div v-if="!isLogin">
-            <router-view></router-view>
-        </div>
-        <div v-else class="layout">
+        <div class="layout">
             <Layout>
                 <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed" style="min-height: 1768px;">
                     <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
@@ -37,16 +34,17 @@
 </template>
 
 <script>
-
     export default {
         name: 'app',
         data () {
             return {
                 isCollapsed: false,
-                isLogin:false,
             }
         },
         computed: {
+            isLogin(){
+              return this.$store.state.isLogin;
+            },
             rotateIcon () {
                 return [
                     'menu-icon',
@@ -63,6 +61,12 @@
         methods: {
             collapsedSider () {
                 this.$refs.side1.toggleCollapse();
+            }
+        },
+        mounted(){
+
+            if(this.isLogin!=='yes'){
+                this.$router.push('login')
             }
         }
     }
