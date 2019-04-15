@@ -34,7 +34,7 @@
 
 
                 <FormItem>
-                    <Button type="primary" @click="add">确定</Button>
+                    <Button type="primary" @click="operate">确定</Button>
                     <Button style="margin-left: 8px" @click="go2UserList">返回</Button>
                 </FormItem>
             </Form>
@@ -45,7 +45,7 @@
     export default {
         data () {
             return {
-                opType:this.$route.query.opType,
+                isEdit:this.$route.query.opType==='edit',
                 formItem: {
                     username: '',
                     name: '',
@@ -66,13 +66,12 @@
             }
         },
         mounted(){
-          console.log(this.opType)
-            if(this.opType==='edit'){
+            if(this.isEdit){
                 this.formItem=this.$route.query.formItem;
             }
         },
         methods:{
-            add(){
+            operate(){
                 this.$refs.addForm.validate(valid=>{
                     if(valid){
                         if(this.formItem.type==='0'){
@@ -88,15 +87,13 @@
                             }
                         }
 
-                        
+                        let url='users/add';
 
-                        this.http.post('users/add',{
-                            username:this.formItem.username,
-                            name:this.formItem.name,
-                            type:this.formItem.type,
-                            studentNumber:this.formItem.studentNumber,
-                            jobNumber:this.formItem.jobNumber,
-                        }).then(()=>{
+                        if(this.isEdit){
+                            url='users/update'
+                        }
+
+                        this.http.post(url,this.formItem).then(()=>{
                             this.$router.push('/user/list')
                         }).catch(err=>{
                             this.$Message.error(err)

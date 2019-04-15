@@ -6,15 +6,15 @@
                     <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
                         <MenuItem name="1-1">
                             <Icon type="ios-navigate"></Icon>
-                            <span>Option 1</span>
+                            <router-link to="/user/list" tag="span">用户管理</router-link>
                         </MenuItem>
                         <MenuItem name="1-2">
                             <Icon type="ios-search"></Icon>
-                            <span>Option 2</span>
+                            <router-link to="/book/list" tag="span">图书管理</router-link>
                         </MenuItem>
                         <MenuItem name="1-3">
                             <Icon type="ios-settings"></Icon>
-                            <span>Option 3</span>
+                            <span>借阅管理</span>
                         </MenuItem>
                     </Menu>
                 </Sider>

@@ -30,6 +30,7 @@ axios.interceptors.response.use(
         if (data.isSuccess === '0' ) {
             return Promise.resolve(data.data);
         }else {
+            console.log(4,data.errorMsg)
             return Promise.reject(data.errorMsg);
         }
     },

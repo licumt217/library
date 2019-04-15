@@ -95,10 +95,10 @@
                             this.$store.commit('isLogin', 'yes')
 
 
-                            this.$router.push('userList')
+                            this.$router.push('user/list')
 
-                        }).catch(data => {
-                            this.$Message.error(data.errorMsg)
+                        }).catch(err => {
+                            this.$Message.error(err)
                         })
                     }
 

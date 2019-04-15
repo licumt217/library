@@ -24,27 +24,12 @@
                         align:'center'
                     },
                     {
-                        title: '用户名',
-                        key: 'username'
-                    },
-                    {
-                        title: '姓名',
+                        title: '书籍名称',
                         key: 'name'
                     },
                     {
-                        title: '用户类型',
-                        key: 'type',
-                        render: (h, params) => {
-                            return h('div', {}, params.row.type === 0 ? '学生' : params.row.type === 1 ? '教师' : '管理员')
-                        }
-                    },{
-
-                        title: '学号',
-                        key: 'studentNumber'
-                    },
-                    {
-                        title: '工号',
-                        key: 'jobNumber'
+                        title: '作者',
+                        key: 'author'
                     },
 
                     {
@@ -89,20 +74,20 @@
             }
         },
         mounted() {
-            this.getUserList()
+            this.getList()
         },
         methods: {
-            getUserList() {
-                this.http.get('users/list', {}).then(data => {
+            getList() {
+                this.http.get('books/list', {}).then(data => {
                     this.dataList = data;
                 })
             },
             add() {
-              this.$router.push('/user/operate')
+              this.$router.push('/book/operate')
             },
             edit(params){
                 this.$router.push({
-                    path:'/user/operate',
+                    path:'/book/operate',
                     query:{
                         opType:'edit',
                         formItem:params.row
@@ -116,11 +101,11 @@
                     content: '',
                     onOk: () => {
 
-                        this.http.post('users/remove',{
+                        this.http.post('books/remove',{
                             _id:params.row._id
                         }).then(()=>{
                             this.$Message.success("删除成功")
-                            this.getUserList()
+                            this.getList()
                         }).catch(error=>{
                             this.$Message.error(error)
                         })
