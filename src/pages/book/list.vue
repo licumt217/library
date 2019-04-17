@@ -47,6 +47,20 @@
                                     },
                                     on:{
                                         click:()=>{
+                                            this.borrow(params)
+                                        }
+                                    }
+                                },'借阅'),
+                                h('Button',{
+                                    props:{
+                                        type:'primary',
+                                        size:'small'
+                                    },
+                                    style:{
+                                        marginRight:'5px'
+                                    },
+                                    on:{
+                                        click:()=>{
                                             this.edit(params)
                                         }
                                     }
@@ -93,6 +107,33 @@
                         formItem:params.row
                     }
                 })
+            },
+            borrow(params){
+
+                this.http.get('borrows/list',{
+                    params:{
+                        book:params.row._id,
+                        state:0
+                    }
+                }).then((data)=>{
+                    console.log(data)
+                    if(data && data.length>0){
+                        this.$Message.warning("此书已被他人借阅！")
+                    }else{
+                        this.$router.push({
+                            path:'/borrow/operate',
+                            query:{
+                                bookId:params.row._id
+                            }
+                        })
+                    }
+
+
+                }).catch(error=>{
+                    this.$Message.error(error)
+                })
+
+
             },
             delete(params){
 

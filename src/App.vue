@@ -14,7 +14,7 @@
                         </MenuItem>
                         <MenuItem name="1-3">
                             <Icon type="ios-settings"></Icon>
-                            <span>借阅管理</span>
+                            <router-link to="/borrow/list" tag="span">借阅管理</router-link>
                         </MenuItem>
                     </Menu>
                 </Sider>

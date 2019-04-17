@@ -88,11 +88,12 @@
                         this.http.post('users/login', {
                             username: this.formItem.username,
                             password: this.formItem.password
-                        }).then(() => {
+                        }).then((data) => {
                             this.$Message.success("登录成功")
                             this.isShowLoginModal = false;
 
                             this.$store.commit('isLogin', 'yes')
+                            this.$store.commit('userId', data._id)
 
 
                             this.$router.push('user/list')

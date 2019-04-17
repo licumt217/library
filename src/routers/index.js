@@ -13,6 +13,9 @@ const user_operate = r => require.ensure([], () => r(require('../pages/user/oper
 const book_list = r => require.ensure([], () => r(require('../pages/book/list')), 'book_list')
 const book_operate = r => require.ensure([], () => r(require('../pages/book/operate')), 'book_operate')
 
+const borrow_list = r => require.ensure([], () => r(require('../pages/borrow/list')), 'borrow_list')
+const borrow_operate = r => require.ensure([], () => r(require('../pages/borrow/operate')), 'borrow_operate')
+
 
 
 const router=new VueRouter({
@@ -45,6 +48,16 @@ const router=new VueRouter({
         },{
             path:'/book/operate',
             component:book_operate
+        },
+
+
+        //borrow
+        {
+            path:'/borrow/list',
+            component:borrow_list
+        },{
+            path:'/borrow/operate',
+            component:borrow_operate
         },
     ]
 })
