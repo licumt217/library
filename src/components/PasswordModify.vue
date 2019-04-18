@@ -9,15 +9,15 @@
                 <Form ref="form" :model="formItem" :label-width="90" :rules="rules">
 
                     <FormItem label="原始密码" prop="password">
-                        <Input v-model="formItem.password" placeholder="请输入原始密码"></Input>
+                        <Input type="password" v-model="formItem.password" placeholder="请输入原始密码"></Input>
                     </FormItem>
 
                     <FormItem label="新密码" prop="newPassword">
-                        <Input v-model="formItem.newPassword" placeholder="请输入新密码"></Input>
+                        <Input type="password" v-model="formItem.newPassword" placeholder="请输入新密码"></Input>
                     </FormItem>
 
                     <FormItem label="确认新密码" prop="confirmPassword">
-                        <Input v-model="formItem.confirmPassword" placeholder="请确认新密码"></Input>
+                        <Input type='password' v-model="formItem.confirmPassword" placeholder="请确认新密码"></Input>
                     </FormItem>
 
                 </Form>
