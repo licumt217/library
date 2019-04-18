@@ -1,19 +1,19 @@
 <template>
-    <Row>
+    <Row style="margin-top:3em;">
         <Col span="8" offset="8">
             <Form ref="addForm" :model="formItem" :label-width="80" :rules="rules">
 
-                <FormItem label="书籍名称" >
+                <FormItem label="书籍名称：" >
                     <span>{{formItem.name}}</span>
                 </FormItem>
 
 
-                <FormItem label="作者" >
+                <FormItem label="作者：" >
                     <span>{{formItem.author}}</span>
                 </FormItem>
 
 
-                <FormItem label="归还日期" >
+                <FormItem label="归还日期：" >
                     <DatePicker type="date" v-model="formItem.endTime" :options="endTimeOptions" placeholder="请输入归还日期" ></DatePicker>
                 </FormItem>
 

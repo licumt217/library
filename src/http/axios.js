@@ -22,8 +22,6 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
     response => {
-        console.log(222)
-
 
         let data=response.data;
 
@@ -36,9 +34,11 @@ axios.interceptors.response.use(
     },
     error => {
 
-        let errorMsg="请求异常"
 
-        if(error.response.status===404){
+        let errorMsg="请求异常"
+        if(error.message && error.message==='Network Error'){
+            errorMsg="网络异常"
+        }else if(error.response.status===404){
             errorMsg="请求地址不存在"
         }
 
