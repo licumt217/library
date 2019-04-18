@@ -34,7 +34,8 @@
       "eslint:recommended"
     ],
     "rules": {
-      "no-console": 0
+      "no-console": 0,
+      "vue/no-parsing-error": [0, { "x-invalid-end-tag": false }]
     },
     "parserOptions": {
       "parser": "babel-eslint"

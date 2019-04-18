@@ -14,7 +14,7 @@
                 <Table stripe :columns="columnsDone" :data="dataListDone"></Table>
             </TabPane>
 
-            <Button type="success" @click="borrow" slot="extra" size="small">借阅</Button>
+            <Button type="primary" @click="borrow" slot="extra" size="small" style="margin:5px 20px 5px auto;">借阅</Button>
 
         </Tabs>
 

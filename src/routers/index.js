@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -35,31 +36,58 @@ const router=new VueRouter({
         {
             path:'/user/list',
             component:user_list
+            ,
+            meta:{
+                activeName:'1-1'
+            }
         },{
             path:'/user/operate',
             component:user_operate
+            ,
+            meta:{
+                activeName:'1-1'
+            }
         },
 
 
         //book
         {
             path:'/book/list',
-            component:book_list
+            component:book_list,
+            meta:{
+                activeName:'1-2'
+            }
         },{
             path:'/book/operate',
-            component:book_operate
+            component:book_operate,
+            meta:{
+                activeName:'1-2'
+            }
         },
 
 
         //borrow
         {
             path:'/borrow/list',
-            component:borrow_list
+            component:borrow_list,
+            meta:{
+                activeName:'1-3'
+            }
         },{
             path:'/borrow/operate',
-            component:borrow_operate
+            component:borrow_operate,
+            meta:{
+                activeName:'1-3'
+            }
         },
     ]
+})
+
+router.afterEach((to,from,next)=>{
+
+    //切换路由时菜单动态跟随切换
+    store.commit('activeMenuName',to.meta.activeName)
+
 })
 
 export default router

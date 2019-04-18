@@ -1,46 +1,32 @@
 <template>
 
 
-    <div v-if="isShowLoginModal">
-        <Modal v-model="isShowLoginModal" width="460" :closable="false" :mask-closable="false">
-            <p slot="header" style="color:#f60;text-align:center">
-                <!--<Icon type="ios-information-circle"></Icon>-->
-                <span>登录</span>
-            </p>
-            <div style="text-align:center">
-                <Form ref='loginForm' :model="formItem" :label-width="80" :rules="rules">
+    <div>
+        <Row>
+            <Col span="4" offset="10">
+                <div style="text-align: center;margin:2em auto;">
+                    <h2>
+                        用户登录
+                    </h2>
+                </div>
+                <div style="text-align:center">
+                    <Form ref='loginForm' :model="formItem" :label-width="80" :rules="rules">
 
-                    <FormItem label="用户名" prop="username">
-                        <Input v-model="formItem.username" placeholder="请输入用户名"/>
-                    </FormItem>
+                        <FormItem label="用户名" prop="username">
+                            <Input prefix="ios-contact" v-model="formItem.username" placeholder="请输入用户名"/>
+                        </FormItem>
 
-                    <FormItem label="密码" prop="password">
-                        <Input v-model="formItem.password" placeholder="请输入密码"/>
-                    </FormItem>
+                        <FormItem label="密码" prop="password">
+                            <Input prefix="ios-lock" type="password" v-model="formItem.password" placeholder="请输入密码"/>
+                        </FormItem>
 
-                    <!--<FormItem label="用户类型">-->
-                    <!--<RadioGroup v-model="formItem.userType">-->
-                    <!--<Radio label="student">学生</Radio>-->
-                    <!--<Radio label="teacher">教师</Radio>-->
-                    <!--<Radio label="admin">管理员</Radio>-->
-                    <!--</RadioGroup>-->
-                    <!--</FormItem>-->
-
-                    <!--<FormItem v-show="formItem.userType==='student'" label="学号">-->
-                    <!--<Input v-model="formItem.studentNumber" placeholder="请输入学号" />-->
-                    <!--</FormItem>-->
-
-                    <!--<FormItem v-show="formItem.userType==='teacher'"  label="工号">-->
-                    <!--<Input v-model="formItem.jobNumber" placeholder="请输入工号" />-->
-                    <!--</FormItem>-->
-
-
-                </Form>
-            </div>
-            <div slot="footer" style="text-align: center">
-                <Button type="primary" @click="login">登录</Button>
-            </div>
-        </Modal>
+                    </Form>
+                </div>
+                <div style="text-align: center">
+                    <Button type="primary" @click="login">登录</Button>
+                </div>
+            </Col>
+        </Row>
     </div>
 
 
@@ -66,7 +52,6 @@
                         {required: true, message: "密码不能为空", trigger: "blur"}
                     ],
                 },
-                isShowLoginModal: true
             }
         },
         computed: {
@@ -75,8 +60,8 @@
             },
         },
         mounted() {
-            if (this.isLogin === 'yes') {
-                this.$router.push('/')
+            if (this.isLogin) {
+                this.$router.push('/user/list')
             }
         },
         methods: {
@@ -90,13 +75,12 @@
                             password: this.formItem.password
                         }).then((data) => {
                             this.$Message.success("登录成功")
-                            this.isShowLoginModal = false;
 
-                            this.$store.commit('isLogin', 'yes')
+                            this.$store.commit('isLogin', true)
                             this.$store.commit('userId', data._id)
 
 
-                            this.$router.push('user/list')
+                            this.$router.push('/user/list')
 
                         }).catch(err => {
                             this.$Message.error(err)
@@ -111,21 +95,4 @@
 </script>
 
 <style scoped>
-    h3 {
-        margin: 40px 0 0;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
 </style>
