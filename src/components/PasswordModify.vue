@@ -62,9 +62,37 @@
             ok() {
                 this.$refs.form.validate((valid)=>{
                     if(valid){
-                        setTimeout(()=>{
+
+                        //新密码和原始密码不能相同
+                        if(this.formItem.password===this.formItem.newPassword){
+                            this.$Message.error('新密码不能和原始密码相同')
+                            return;
+                        }
+
+
+                        //新密码和确认密码必须相同
+
+                        if(this.formItem.newPassword!==this.formItem.confirmPassword){
+                            this.$Message.error('新密码和确认密码不相同')
+                            return;
+                        }
+
+
+                        this.http.post('users/modifyPassword',{
+                            _id:this.$store.state.userId,
+                            password:this.formItem.password,
+                            newPassword:this.formItem.newPassword,
+                            confirmPassword:this.formItem.confirmPassword,
+                        }).then(()=>{
+                            this.$Message.success('密码修改成功，请重新登录')
                             this.isShow=false;
-                        },3000)
+                            this.$store.commit("isLogin",false)
+                            this.$router.push('/login')
+                        }).catch(err=>{
+                            this.$Message.error(err)
+
+                        })
+
                     }
 
 
