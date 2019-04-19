@@ -10,6 +10,7 @@ const homepage = r => require.ensure([], () => r(require('../pages/homepage')), 
 
 const user_list = r => require.ensure([], () => r(require('../pages/user/list')), 'user_list')
 const user_operate = r => require.ensure([], () => r(require('../pages/user/operate')), 'user_operate')
+const user_detail = r => require.ensure([], () => r(require('../pages/user/detail')), 'user_detail')
 
 const book_list = r => require.ensure([], () => r(require('../pages/book/list')), 'book_list')
 const book_operate = r => require.ensure([], () => r(require('../pages/book/operate')), 'book_operate')
@@ -43,6 +44,13 @@ const router=new VueRouter({
         },{
             path:'/user/operate',
             component:user_operate
+            ,
+            meta:{
+                activeName:'1-1'
+            }
+        },{
+            path:'/user/detail',
+            component:user_detail
             ,
             meta:{
                 activeName:'1-1'

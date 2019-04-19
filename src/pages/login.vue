@@ -33,6 +33,7 @@
 </template>
 
 <script>
+    const md5=require('md5')
     export default {
         data() {
             return {
@@ -70,6 +71,8 @@
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
 
+                        this.formItem.password=md5(this.formItem.password)
+
                         this.http.post('users/login', {
                             username: this.formItem.username,
                             password: this.formItem.password
@@ -78,6 +81,8 @@
 
                             this.$store.commit('isLogin', true)
                             this.$store.commit('userId', data._id)
+                            this.$store.commit('username', data.username)
+                            this.$store.commit('userInfo', data)
 
 
                             this.$router.push('/user/list')

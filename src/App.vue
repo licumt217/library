@@ -27,8 +27,9 @@
                                 <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}"
                                       type="md-menu" size="24"></Icon>
                             </Col>
-                            <Col span="3" offset="17">
-                                <Menu mode="horizontal" active-name="1" @on-select="operate">
+                            <Col span="6" offset="14">
+
+                                <Menu mode="horizontal" active-name="1" @on-select="operate" style="display: inline-block;float: right">
                                     <Submenu name="3" on-select="logout">
                                         <template slot="title">
                                             <Icon type="ios-stats"/>
@@ -40,6 +41,10 @@
                                         </MenuGroup>
                                     </Submenu>
                                 </Menu>
+                                <div style="float: right" @click="go2UserDetail">
+                                    <Avatar icon="ios-person" style="background-color: #87d068" /> {{username}}
+                                </div>
+
                             </Col>
                         </Row>
 
@@ -74,6 +79,9 @@
             activeMenuName(){
                 return this.$store.state.activeMenuName;
             },
+            username(){
+                return this.$store.state.username;
+            },
             isLogin() {
                 return this.$store.state.isLogin;
             },
@@ -104,14 +112,12 @@
                     this.$router.push('/login')
 
                 }else if(name==='passModify'){
-                    // this.isShowPassModifyModal=true;
                     this.$refs.pass.show();
                 }
 
-
-
-
-
+            },
+            go2UserDetail(){
+                this.$router.push('/user/detail')
             }
 
         },
@@ -195,4 +201,12 @@
     .hidden {
         display: none;
     }
+    .ivu-menu-horizontal.ivu-menu-light:after{
+        width: auto!important;
+    }
+     .ivu-menu-horizontal .ivu-menu-submenu {
+        float: right!important;
+         display: inline-block!important;
+    }
+
 </style>
