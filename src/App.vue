@@ -5,20 +5,44 @@
                 <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed"
                        style="min-height: 1768px;" :class="{'hidden':!isLogin}">
                     <Menu :active-name="activeMenuName" theme="dark" width="auto" :class="menuitemClasses">
-                        <MenuItem name="1-1" to="/user/list">
-                            <Icon type="ios-body"></Icon>
-                            <span>用户管理</span>
-                        </MenuItem>
-                        <MenuItem name="1-2" to="/book/list">
-                            <Icon type="ios-book"></Icon>
-                            <span>图书管理</span>
-                        </MenuItem>
-                        <MenuItem name="1-3" to="/borrow/list">
-                            <Icon type="ios-paper"></Icon>
-                            <span>借阅管理</span>
+
+                        <Submenu name="1">
+                            <template slot="title">
+                                <Icon type="ios-paper" />
+                                权限管理
+                            </template>
+                            <MenuItem name="1-3" to="/resource/list">资源管理</MenuItem>
+                            <MenuItem name="1-2">角色管理</MenuItem>
+                            <MenuItem name="1-1">人员管理</MenuItem>
+                        </Submenu>
+                        <Submenu name="2">
+                            <template slot="title">
+                                <Icon type="ios-people" />
+                                用户管理
+                            </template>
+                            <MenuItem name="2-1">新增用户</MenuItem>
+                            <MenuItem name="2-2">活跃用户</MenuItem>
+                        </Submenu>
+
+
+
+                        <MenuItem :name="menu.order" :to="menu.url" v-for="menu in menuList">
+                            <Icon :type="menu.icon"></Icon>
+                            <span>{{menu.name}}</span>
                         </MenuItem>
 
                     </Menu>
+
+
+
+
+
+
+
+
+
+
+
                 </Sider>
                 <Layout :class="{'layout_notlogin':!isLogin}">
                     <Header :style="{padding: 0}" class="layout-header-bar" :class="{'hidden':!isLogin}">
@@ -30,7 +54,7 @@
                             <Col span="6" offset="14">
 
                                 <Menu mode="horizontal" active-name="1" @on-select="operate" style="display: inline-block;float: right">
-                                    <Submenu name="3" on-select="logout">
+                                    <Submenu name="3">
                                         <template slot="title">
                                             <Icon type="ios-stats"/>
                                             个人中心
@@ -76,6 +100,10 @@
           Pass
         },
         computed: {
+
+            menuList(){
+                return this.$store.state.menuList;
+            },
             activeMenuName(){
                 return this.$store.state.activeMenuName;
             },
@@ -108,7 +136,7 @@
 
                 if(name==='logout'){
 
-                    this.$store.commit("isLogin",false)
+                    this.$store.commit('reset')
                     this.$router.push('/login')
 
                 }else if(name==='passModify'){

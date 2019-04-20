@@ -83,9 +83,9 @@
                             this.$store.commit('userId', data._id)
                             this.$store.commit('username', data.username)
                             this.$store.commit('userInfo', data)
+                            this.getMenuList()
 
 
-                            this.$router.push('/user/list')
 
                         }).catch(err => {
                             this.$Message.error(err)
@@ -93,6 +93,26 @@
                     }
 
                 })
+
+            },
+            getMenuList(){
+                this.http.get('resources/list', {
+                    params:{
+                        userId:this.$store.state.userId
+                    }
+                }).then((data) => {
+
+                    this.$store.commit("menuList",data)
+
+                    this.$router.push('/')
+
+
+                }).catch(err => {
+                    this.$Message.error(err)
+                })
+
+
+
 
             }
         }

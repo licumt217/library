@@ -9,7 +9,8 @@ const state={
     userId:sessionStorage.getItem("userId")||'',
     activeMenuName:sessionStorage.getItem("activeMenuName")||'1-1',
     username:sessionStorage.getItem("username")||'',
-    userInfo:sessionStorage.getItem("userInfo")?JSON.parse(sessionStorage.getItem("userInfo")):{}
+    userInfo:sessionStorage.getItem("userInfo")?JSON.parse(sessionStorage.getItem("userInfo")):{},
+    menuList:sessionStorage.getItem("menuList")?JSON.parse(sessionStorage.getItem("menuList")):[]
 }
 
 const getters={
@@ -47,6 +48,21 @@ const mutations={
         sessionStorage.setItem("userInfo",JSON.stringify(value))
         state.userInfo=value
     },
+    menuList:(state,value)=>{
+        sessionStorage.setItem("menuList",JSON.stringify(value))
+        state.menuList=value
+    },
+    reset(state){
+        for(let key in state){
+            state[key]=undefined;
+        }
+
+        let keyArray=['isLogin','userId','activeMenuName','username','userInfo','menuList']
+
+        keyArray.forEach((key)=>{
+            sessionStorage.removeItem(key)
+        })
+    }
 }
 
 export default new Vuex.Store({state,getters,mutations})

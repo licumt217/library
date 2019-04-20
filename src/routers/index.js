@@ -19,6 +19,12 @@ const borrow_list = r => require.ensure([], () => r(require('../pages/borrow/lis
 const borrow_operate = r => require.ensure([], () => r(require('../pages/borrow/operate')), 'borrow_operate')
 
 
+const resource_list = r => require.ensure([], () => r(require('../pages/resource/list')), 'resource_list')
+const resource_operate = r => require.ensure([], () => r(require('../pages/resource/operate')), 'resource_operate')
+
+
+
+
 
 const router=new VueRouter({
     base:'library',
@@ -88,6 +94,22 @@ const router=new VueRouter({
                 activeName:'1-3'
             }
         },
+
+
+        {
+            path:'/resource/list',
+            component:resource_list,
+            meta:{
+                activeName:'1-4'
+            }
+        },{
+            path:'/resource/operate',
+            component:resource_operate,
+            meta:{
+                activeName:'1-4'
+            }
+        },
+
     ]
 })
 
