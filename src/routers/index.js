@@ -22,6 +22,10 @@ const borrow_operate = r => require.ensure([], () => r(require('../pages/borrow/
 const resource_list = r => require.ensure([], () => r(require('../pages/resource/list')), 'resource_list')
 const resource_operate = r => require.ensure([], () => r(require('../pages/resource/operate')), 'resource_operate')
 
+const role_list = r => require.ensure([], () => r(require('../pages/role/list')), 'role_list')
+const role_operate = r => require.ensure([], () => r(require('../pages/role/operate')), 'role_operate')
+const role_auth = r => require.ensure([], () => r(require('../pages/role/auth')), 'role_auth')
+
 
 
 
@@ -105,6 +109,27 @@ const router=new VueRouter({
         },{
             path:'/resource/operate',
             component:resource_operate,
+            meta:{
+                activeName:'1-4'
+            }
+        },
+
+
+        {
+            path:'/role/list',
+            component:role_list,
+            meta:{
+                activeName:'1-4'
+            }
+        },{
+            path:'/role/operate',
+            component:role_operate,
+            meta:{
+                activeName:'1-4'
+            }
+        },{
+            path:'/role/auth',
+            component:role_auth,
             meta:{
                 activeName:'1-4'
             }
