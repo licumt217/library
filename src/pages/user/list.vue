@@ -79,7 +79,21 @@
                                             this.delete(params)
                                         }
                                     }
-                                },'删除')
+                                },'删除'),
+                                h('Button',{
+                                    props:{
+                                        type:'success',
+                                        size:'small'
+                                    },
+                                    style:{
+                                        marginRight:'5px'
+                                    },
+                                    on:{
+                                        click:()=>{
+                                            this.auth(params)
+                                        }
+                                    }
+                                },'授权')
                             ])
                         }
                     }
@@ -106,6 +120,14 @@
                     query:{
                         opType:'edit',
                         formItem:params.row
+                    }
+                })
+            },
+            auth(params) {
+                this.$router.push({
+                    path:'/user/auth',
+                    query:{
+                        userId:params.row._id
                     }
                 })
             },

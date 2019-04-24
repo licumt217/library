@@ -4,42 +4,29 @@
             <Layout>
                 <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed"
                        style="min-height: 1768px;" :class="{'hidden':!isLogin}">
-                    <Menu :active-name="activeMenuName" theme="dark" width="auto" :class="menuitemClasses">
+                    <Menu :active-name="activeMenuName" ref="menu" theme="dark" width="auto" @on-select="selectMenu" :class="menuitemClasses" >
 
-                        <Submenu name="1">
-                            <template slot="title">
-                                <Icon type="ios-paper" />
-                                权限管理
+                        <template  v-for="menu in menuList">
+                            <template v-if="menu.children.length>0">
+                                <Submenu :name="menu.activeName">
+                                    <template slot="title">
+                                        <Icon :type="menu.icon" />
+                                        {{menu.name}}
+                                    </template>
+
+                                    <MenuItem :name="submenu.activeName" v-for="submenu in menu.children">{{submenu.name}}</MenuItem>
+                                </Submenu>
                             </template>
-                            <MenuItem name="1-3" to="/resource/list">资源管理</MenuItem>
-                            <MenuItem name="1-2">角色管理</MenuItem>
-                            <MenuItem name="1-1">人员管理</MenuItem>
-                        </Submenu>
-                        <Submenu name="2">
-                            <template slot="title">
-                                <Icon type="ios-people" />
-                                用户管理
+                            <template v-else>
+                                <MenuItem :name="menu.activeName"  >
+                                    <Icon :type="menu.icon"></Icon>
+                                    <span>{{menu.name}}</span>
+                                </MenuItem>
                             </template>
-                            <MenuItem name="2-1">新增用户</MenuItem>
-                            <MenuItem name="2-2">活跃用户</MenuItem>
-                        </Submenu>
 
-
-
-                        <MenuItem :name="menu.order" :to="menu.url" v-for="menu in menuList">
-                            <Icon :type="menu.icon"></Icon>
-                            <span>{{menu.name}}</span>
-                        </MenuItem>
+                        </template>
 
                     </Menu>
-
-
-
-
-
-
-
-
 
 
 
@@ -127,6 +114,17 @@
             }
         },
         methods: {
+            selectMenu(activeName){
+                // console.log(e)
+                // this.$router.push(e)
+                // console.log(activeName)
+
+                // this.$nextTick(()=>{
+                //     setTimeout(()=>{
+                        this.$router.push(activeName)
+                    // },5000)
+                // })
+            },
 
             collapsedSider() {
                 this.$refs.side1.toggleCollapse();

@@ -96,7 +96,7 @@
 
             },
             getMenuList(){
-                this.http.get('resources/list', {
+                this.http.get('resources/listByLevel', {
                     params:{
                         userId:this.$store.state.userId
                     }

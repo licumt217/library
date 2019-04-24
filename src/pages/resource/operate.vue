@@ -69,7 +69,9 @@
                         if(this.isEdit){
                             url='resources/update'
                         }
-
+                        if(!this.formItem.icon){
+                         this.formItem.icon=undefined;
+                        }
                         this.http.post(url,this.formItem).then(()=>{
                             this.$Message.success("添加成功！")
                             this.$router.push('/resource/list')

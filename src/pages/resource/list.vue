@@ -163,10 +163,19 @@
 
                 if(node){
                     this.selectedNode=node;
-                    // alert(1,JSON.stringify(code))
                     this.http.get('resources/getChildrenAndSelf', {
                         params:{
                             code:node.code
+                        }
+                    }).then(data => {
+
+                        this.dataList=data;
+
+                    })
+                }else{
+                    this.http.get('resources/getChildrenAndSelf', {
+                        params:{
+                            code:'0'
                         }
                     }).then(data => {
 
@@ -229,6 +238,7 @@
                         }).then(()=>{
                             this.$Message.success("删除成功")
                             this.getByLevel()
+                            this.getListByParentCode()
 
                         }).catch(error=>{
                             this.$Message.error(error)
