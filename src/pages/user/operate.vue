@@ -4,7 +4,7 @@
             <Form ref="addForm" :model="formItem" :label-width="80" :rules="rules">
 
                 <FormItem label="用户名" prop="username">
-                    <Input v-model="formItem.username" placeholder="输入用户名" />
+                    <Input v-model="formItem.username" placeholder="输入用户名" :disabled="userId"/>
                 </FormItem>
 
 
@@ -45,7 +45,7 @@
     export default {
         data () {
             return {
-                isEdit:this.$route.query.opType==='edit',
+                userId:this.$route.query.userId,
                 formItem: {
                     username: '',
                     name: '',
@@ -66,11 +66,22 @@
             }
         },
         mounted(){
-            if(this.isEdit){
-                this.formItem=this.$route.query.formItem;
+            if(this.userId){
+                this.findById(this.userId)
             }
         },
         methods:{
+            findById(userId){
+                this.http.post('users/findById',{
+                    _id:userId
+                }).then((data)=>{
+                    // data.username='sysadmin'
+                    this.formItem=data;
+                }).catch(err=>{
+                    this.$Message.error(err)
+                })
+            },
+
             operate(){
                 this.$refs.addForm.validate(valid=>{
                     if(valid){
@@ -89,7 +100,7 @@
 
                         let url='users/add';
 
-                        if(this.isEdit){
+                        if(this.userId){
                             url='users/update'
                         }
 

@@ -11,10 +11,12 @@
                                 <Submenu :name="menu.activeName">
                                     <template slot="title">
                                         <Icon :type="menu.icon" />
-                                        {{menu.name}}
+                                        <span>{{menu.name}}</span>
                                     </template>
 
-                                    <MenuItem :name="submenu.activeName" v-for="submenu in menu.children">{{submenu.name}}</MenuItem>
+                                    <MenuItem :name="submenu.activeName" v-for="submenu in menu.children">
+                                        <span>{{submenu.name}}</span>
+                                    </MenuItem>
                                 </Submenu>
                             </template>
                             <template v-else>

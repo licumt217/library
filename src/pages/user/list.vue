@@ -118,8 +118,7 @@
                 this.$router.push({
                     path:'/user/operate',
                     query:{
-                        opType:'edit',
-                        formItem:params.row
+                        userId:params.row._id,
                     }
                 })
             },
